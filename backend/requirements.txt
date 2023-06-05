@@ -1,6 +1,10 @@
 django
 djangorestframework
-psycopg2
-cryptography
-django-cors-headers
 djangorestframework-simplejwt
+cryptography
+django-environ
+psycopg2
+django-cors-headers
+
+gunicorn
+django-heroku
