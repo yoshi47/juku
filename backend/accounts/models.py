@@ -81,3 +81,56 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class School(models.Model):
+    name = models.CharField(_('学校名'), max_length=30)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('学校')
+        verbose_name_plural = _('学校')
+
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    school = models.ForeignKey(School, on_delete=models.PROTECT, verbose_name=_("学校"))
+    GRADE_CHOICES = [
+        (
+            "小学校",
+            (
+                (1, "1年生"),
+                (2, "2年生"),
+                (3, "3年生"),
+                (4, "4年生"),
+                (5, "5年生"),
+                (6, "6年生"),
+            ),
+        ),
+        (
+            "中学校",
+            (
+                (7, "1年生"),
+                (8, "2年生"),
+                (9, "3年生"),
+            )
+        ),
+        (
+            "高校",
+            (
+                (10, "1年生"),
+                (11, "2年生"),
+                (12, "3年生"),
+            )
+        ),
+        (13, "既卒"),
+    ]
+
+    grade = models.IntegerField(choices=GRADE_CHOICES, verbose_name=_("学年"))
+    subjects = models.ManyToManyField("lessons.Subject", verbose_name=_("やる教科"), blank=True)
+
+    class Meta:
+        verbose_name = _("学年")
+        verbose_name_plural = _("学年")
