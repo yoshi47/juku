@@ -36,6 +36,8 @@ ALLOWED_HOSTS = ['localhost', '.herokuapp.com', 'juku-django-1']
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +47,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'accounts.apps.AccountsConfig',
-
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,9 +81,7 @@ WSGI_APPLICATION = 'juku.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'default': env.db(),
-    }
+    'default': env.db(),
 }
 
 
@@ -127,6 +125,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.User'
 
 import django_heroku
 django_heroku.settings(locals(), databases=False)
