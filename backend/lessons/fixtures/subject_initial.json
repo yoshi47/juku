@@ -1,0 +1,128 @@
+[
+  {
+    "model": "lessons.subject",
+    "pk": 1,
+    "fields": {
+      "name": "小国"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 2,
+    "fields": {
+      "name": "小数"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 3,
+    "fields": {
+      "name": "小英"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 4,
+    "fields": {
+      "name": "中国"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 5,
+    "fields": {
+      "name": "中数"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 6,
+    "fields": {
+      "name": "中英"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 7,
+    "fields": {
+      "name": "中社"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 8,
+    "fields": {
+      "name": "中理"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 9,
+    "fields": {
+      "name": "現代文"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 10,
+    "fields": {
+      "name": "古典"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 11,
+    "fields": {
+      "name": "数ⅠA"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 12,
+    "fields": {
+      "name": "数ⅡB"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 13,
+    "fields": {
+      "name": "数Ⅲ"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 14,
+    "fields": {
+      "name": "高英"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 15,
+    "fields": {
+      "name": "物基"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 16,
+    "fields": {
+      "name": "化基"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 17,
+    "fields": {
+      "name": "物理"
+    }
+  },
+  {
+    "model": "lessons.subject",
+    "pk": 18,
+    "fields": {
+      "name": "化学"
+    }
+  }
+]
