@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['localhost', '.herokuapp.com', 'juku-django-1']
 
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
+    'lessons.apps.LessonsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
