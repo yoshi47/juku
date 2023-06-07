@@ -10,3 +10,14 @@ export type Student = {
     }
     text: string;
 };
+
+export type Lesson = {
+    id: number;
+    student_username: string;
+    teacher_username: string;
+    student: string;
+    teacher: string;
+    subject: string;
+    period: number;
+    date: string;
+}
