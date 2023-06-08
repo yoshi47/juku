@@ -57,7 +57,7 @@ export default async function StudentPage({params,}: { params: { student: string
                             className="transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
                             <FormatDate date={lesson.date}/>
                             <div
-                                className="flex flex-col items-center justify-center h-10 ml-10 text-gray-600 dark:text-gray-200">
+                                className="flex flex-col items-center justify-center h-10 mr-4 text-gray-600 dark:text-gray-200">
                                 {lesson.period}限
                             </div>
                             <div className="flex-1 pl-1 md:mr-16">
