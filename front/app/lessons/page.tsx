@@ -1,5 +1,6 @@
-import {Lesson} from "@type/types";
-import {FormatDate, FormattDate} from "@components/FormatDate";
+import { Lesson } from "@type/types";
+import { FormatDate } from "@/lib/functions";
+
 
 async function getLessons() {
     const res = await fetch(`${process.env.BACKEND_URL}/api/lessons/`, {
@@ -39,7 +40,8 @@ export default async function LessonsList() {
                             {lessons.map((lesson) => (
                                 <tr key={lesson.id}
                                     className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                    <td className="whitespace-nowrap px-6 py-4">{lesson.date}</td>
+                                    {/* <td className="whitespace-nowrap px-6 py-4">{lesson.date}</td> */}
+                                    <td className="whitespace-nowrap px-6 py-4"> {FormatDate(lesson.date)}</td>
                                     <td className="whitespace-nowrap px-6 py-4">{lesson.period}時限目</td>
                                     <td className="whitespace-nowrap px-6 py-4">{lesson.student}</td>
                                     <td className="whitespace-nowrap px-6 py-4">{lesson.teacher}</td>
