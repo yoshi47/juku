@@ -10,3 +10,4 @@ docker compose up -d
 docker compose run --rm django sh -c "django-admin startapp accounts" 
 
 docker compose run --rm django sh -c "django-admin startapp lessons"
+docker compose run --rm djangoga sh -c "python manage.py dumpdata --exclude admin --exclude auth.permission --exclude contenttypes > all.json"
