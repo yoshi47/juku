@@ -14,11 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from accounts.views import StudentViewSet, TeacherViewSet
-from lessons.views import LessonViewSet
+from accounts.views import StudentViewSet, TeacherViewSet, MyTokenObtainPairView
 from django.contrib import admin
 from django.urls import path, include
+from lessons.views import LessonViewSet
 from rest_framework import routers
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = routers.DefaultRouter()
 router.register(r'students', StudentViewSet)
@@ -28,4 +29,6 @@ router.register(r'lessons', LessonViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
