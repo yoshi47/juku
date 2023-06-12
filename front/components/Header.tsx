@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LoginBtn } from "@components/Login-btn"
 
 export function Header() {
     return (
@@ -18,6 +19,7 @@ export function Header() {
                     <Link href="/students" className="mr-5 hover:text-gray-900">生徒</Link>
                     <Link href="/teachers" className="mr-5 hover:text-gray-900">先生</Link>
                 </nav>
+                <LoginBtn />
                 <button
                     className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"

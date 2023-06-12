@@ -29,3 +29,14 @@ export type Lesson = {
     period: number;
     date: string;
 };
+
+export type UserInfo = {
+    token_type: string;
+    exp: number;
+    iat: number;
+    jti: string;
+    user_id: number;
+    username: string;
+    name: string;
+    role: string;
+};
