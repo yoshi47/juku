@@ -5,7 +5,6 @@ import React from "react";
 
 export function LoginBtn() {
     const { data: session } = useSession();
-    console.log(session);
     if (session) {
         return (
             <>

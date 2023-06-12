@@ -20,7 +20,7 @@ const handler = NextAuth({
 
                 const data = await res.json();
                 // const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET) as UserInfo;
-                const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET);
+                const user = jwt.verify(data.access, process.env.NEXTAUTH_SECRET ?? "");
                 if (res.ok && user) {
                     return {...data, user};
                 } else {
