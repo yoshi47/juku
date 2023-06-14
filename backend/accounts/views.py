@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from .serializers import StudentSerializer, TeacherSerializer, MyTokenObtainPairSerializer
+from .serializers import StudentSerializer, UserSerializer, MyTokenObtainPairSerializer
 
 
 # Create your views here.
@@ -15,7 +15,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = User.objects.filter(user_type__in=["admin", "teacher"])
-    serializer_class = TeacherSerializer
+    serializer_class = UserSerializer
     lookup_field = "username"
 
 

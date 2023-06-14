@@ -4,6 +4,12 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import User, Student
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'last_name', 'first_name', 'email', 'text',)
+
+
 class BaseStudentSerializer(serializers.ModelSerializer):
     school = serializers.CharField(source='school.name')
     grade = serializers.CharField(source='get_grade_display')
@@ -20,12 +26,6 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'last_name', 'first_name', 'email', 'student', 'text',)
-
-
-class TeacherSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'last_name', 'first_name', 'email', 'text',)
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
