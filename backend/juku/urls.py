@@ -21,6 +21,8 @@ from lessons.views import LessonViewSet
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView
 
+from api_v1.urls import router as api_v1_router
+
 router = routers.DefaultRouter()
 router.register(r'students', StudentViewSet)
 router.register(r'teachers', TeacherViewSet)
@@ -31,4 +33,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/', include(api_v1_router.urls)),
 ]
