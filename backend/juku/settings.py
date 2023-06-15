@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'lessons.apps.LessonsConfig',
 
     'rest_framework',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,3 +145,9 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }
+
+APPEND_SLASH = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
