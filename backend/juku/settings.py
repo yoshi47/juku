@@ -146,8 +146,6 @@ SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }
 
-APPEND_SLASH = False
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
