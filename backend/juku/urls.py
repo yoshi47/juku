@@ -24,7 +24,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 router = routers.DefaultRouter()
 router.register(r'students', StudentViewSet)
 router.register(r'teachers', TeacherViewSet)
-router.register(r'lessons', LessonViewSet)
+router.register(r'lessons', LessonViewSet, basename='lessons')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
