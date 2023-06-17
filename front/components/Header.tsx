@@ -20,9 +20,9 @@ export function Header() {
                     <Link href="/teachers" className="mr-5 hover:text-gray-900">先生</Link>
                 </nav>
                 <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                    <Link href="" className="mr-5 hover:text-gray-900">新規先生</Link>
-                    <Link href="" className="mr-5 hover:text-gray-900">新規生徒</Link>
-                    <Link href="" className="mr-5 hover:text-gray-900">授業登録</Link>
+                    <Link href="/teachers/new" className="mr-5 hover:text-gray-900">新規先生</Link>
+                    <Link href="/students/new" className="mr-5 hover:text-gray-900">新規生徒</Link>
+                    <Link href="/lessons/new" className="mr-5 hover:text-gray-900">授業登録</Link>
                 </nav>
                 <LoginBtn />
             </div>
