@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function AddStudent() {
     const router = useRouter()
 
-    const handleSubmit = async (event) => {
+    async function handleSubmit(event: any) {
         event.preventDefault()
 
         const studentData = {
