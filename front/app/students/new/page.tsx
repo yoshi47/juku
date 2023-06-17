@@ -2,10 +2,33 @@
 
 import process from "process";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 export default function AddStudent() {
     const router = useRouter()
+
+    const [form, setForm] = useState({
+        username: "",
+        password: "st",
+        last_name: "",
+        first_name: "",
+        email: "",
+        student: {
+            school: "",
+            grade: "",
+            subjects: "",
+        },
+        text: "",
+        user_type: "student",
+    })
+
+    const handleChange = (input) => (event) => {
+        setForm({
+            ...form,
+            [input]: event.target.value,
+        })
+    }
 
     async function handleSubmit(event: any) {
         event.preventDefault()
@@ -25,11 +48,11 @@ export default function AddStudent() {
             user_type: "student",
         }
 
-        const JSONstudentData = JSON.stringify(studentData)
-        console.log(JSONstudentData)
+        // const JSONstudentData = JSON.stringify(studentData)
+        const JSONstudentData = JSON.stringify(form)
 
         // const response = await fetch(`${process.env.BACKEND_URL}/api/students`, {
-        const response = await fetch("http://localhost:8000/api/students/", {
+        const response = await fetch(`${process.env.POST_URL}/api/students/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
