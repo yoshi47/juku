@@ -43,8 +43,8 @@ export default async function LessonsList() {
                                     {/* <td className="whitespace-nowrap px-6 py-4">{lesson.date}</td> */}
                                     <td className="whitespace-nowrap px-6 py-4"> {FormatDate(lesson.date)}</td>
                                     <td className="whitespace-nowrap px-6 py-4">{lesson.period}時限目</td>
-                                    <td className="whitespace-nowrap px-6 py-4">{lesson.student}</td>
-                                    <td className="whitespace-nowrap px-6 py-4">{lesson.teacher}</td>
+                                    <td className="whitespace-nowrap px-6 py-4">{lesson.student_name}</td>
+                                    <td className="whitespace-nowrap px-6 py-4">{lesson.teacher_name}</td>
                                     <td className="whitespace-nowrap px-6 py-4">{lesson.subject}</td>
                                 </tr>
                             ))}

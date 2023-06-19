@@ -21,10 +21,10 @@ export type Teacher = {
 
 export type Lesson = {
     id: number;
-    student_username: string;
-    teacher_username: string;
     student: string;
+    student_name: string;
     teacher: string;
+    teacher_name: string;
     subject: string;
     period: number;
     date: string;

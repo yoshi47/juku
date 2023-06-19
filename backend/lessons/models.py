@@ -15,9 +15,9 @@ class Subject(models.Model):
 
 class Lesson(models.Model):
     student = models.ForeignKey("accounts.User", on_delete=models.PROTECT, limit_choices_to={"user_type": "student"},
-                                related_name="student_name")
+                                related_name="student_username")
     teacher = models.ForeignKey("accounts.User", on_delete=models.PROTECT, limit_choices_to={"user_type": "teacher"},
-                                related_name="teacher_name")
+                                related_name="teacher_username")
     subject = models.ForeignKey("lessons.Subject", on_delete=models.PROTECT)
     CHOICES = [(i, f"{i}限") for i in range(1, 9)]
     period = models.IntegerField(choices=CHOICES)
