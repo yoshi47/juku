@@ -57,3 +57,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = user.user_type
 
         return token
+
+
+class SchoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = ('id', 'name',)

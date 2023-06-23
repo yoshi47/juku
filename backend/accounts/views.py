@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import User
-from .serializers import StudentSerializer, UserSerializer, MyTokenObtainPairSerializer
+from .models import User, School
+from .serializers import StudentSerializer, UserSerializer, MyTokenObtainPairSerializer, SchoolSerializer
 
 
 # Create your views here.
@@ -21,3 +21,7 @@ class TeacherViewSet(viewsets.ModelViewSet):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class SchoolListView(generics.ListAPIView):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializer
