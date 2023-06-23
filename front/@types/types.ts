@@ -1,23 +1,43 @@
-export type Student = {
+// export type Student = {
+//     username: string;
+//     last_name: string;
+//     first_name: string;
+//     email: string;
+//     student: {
+//         school: string;
+//         grade: string;
+//         subject: string[];
+//     }
+//     text: string;
+// };
+
+// export type Teacher = {
+//     username: string;
+//     last_name: string;
+//     first_name: string;
+//     email: string;
+//     text: string;
+// }
+
+export type User = {
     username: string;
+    password?: string;
     last_name: string;
     first_name: string;
     email: string;
+    text: string;
+    user_type?: string;
+}
+
+export type Student = User & {
     student: {
         school: string;
         grade: string;
-        subject: [string];
+        subject: string;
     }
-    text: string;
 };
 
-export type Teacher = {
-    username: string;
-    last_name: string;
-    first_name: string;
-    email: string;
-    text: string;
-}
+export type Teacher = User;
 
 export type Lesson = {
     id: number;

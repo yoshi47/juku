@@ -2,10 +2,11 @@
 import process from "process";
 import {useRouter} from "next/navigation";
 import {ChangeEvent, FormEvent, useState} from "react";
+import {Teacher} from "@type/types";
 
 export default function AddTeacher() {
     const router = useRouter()
-    const [teacher_data, setTeacherData] = useState({
+    const [teacher_data, setTeacherData] = useState<Teacher>({
         "username": "",
         "password": "te",
         "last_name": "",
