@@ -34,7 +34,7 @@ export type Student = User & {
     student: {
         school: string;
         grade: string;
-        subject: string[];
+        subjects: string[];
     }
 };
 
