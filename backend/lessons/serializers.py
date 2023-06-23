@@ -13,3 +13,8 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = ('id', 'student', 'student_name', 'teacher', 'teacher_name', 'subject', 'period', 'date',)
+        
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = ('id', 'name',)

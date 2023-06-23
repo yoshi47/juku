@@ -1,8 +1,7 @@
-from rest_framework import viewsets
-from rest_framework.response import Response
+from rest_framework import viewsets, generics
 
-from .models import Lesson
-from .serializers import LessonSerializer
+from .models import Lesson, Subject
+from .serializers import LessonSerializer, SubjectSerializer
 
 
 # Create your views here.
@@ -19,3 +18,8 @@ class LessonViewSet(viewsets.ModelViewSet):
         elif teacher is not None:
             queryset = queryset.filter(teacher__username=teacher)
         return queryset
+    
+
+class SubjectListView(generics.ListAPIView):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
