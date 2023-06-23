@@ -40,15 +40,18 @@ export type Student = User & {
 
 export type Teacher = User;
 
-export type Lesson = {
-    id: number;
+export type PostLesson = {
     student: string;
-    student_name: string;
     teacher: string;
-    teacher_name: string;
     subject: string;
     period: number;
     date: string;
+}
+
+export type Lesson = PostLesson & {
+    id: number;
+    student_name: string;
+    teacher_name: string;
 };
 
 export type UserInfo = {

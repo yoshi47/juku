@@ -40,7 +40,6 @@ export default function AddStudent() {
                 [name]: value,
             },
         });
-        console.log(student_data)
     }
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
