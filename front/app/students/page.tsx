@@ -1,24 +1,5 @@
-import * as process from "process";
 import Link from "next/link";
-import {Student} from "@type/types";
-
-async function getStudents() {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/students`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        cache: "reload",
-    })
-
-    if (!res.ok) {
-        const message = `An error has occurred: ${res.status}`;
-        throw new Error(message);
-    }
-
-    const data = await res.json();
-    return data as Student[];
-}
+import {getStudents} from "@/lib/functions";
 
 export default async function StudentList() {
     const students = await getStudents();
