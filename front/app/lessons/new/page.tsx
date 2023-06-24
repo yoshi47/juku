@@ -2,8 +2,19 @@
 
 import process from "process";
 import {useRouter} from "next/navigation";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, FormEvent, ReactHTML, useState} from "react";
 import {PostLesson} from "@type/types";
+import Select from "react-select"
+import AsyncSelect from 'react-select/async';
+
+const options = [
+  { value: 'pikachu', label: 'ピカチュウ' },
+  { value: 'bulbasaur', label: 'フシギダネ' },
+  { value: 'charmander', label: 'ヒトカゲ' },
+  { value: 'squirtle', label: 'ゼニガメ' },
+];
+
+
 
 export default function AddLesson() {
     const router = useRouter()
@@ -15,24 +26,26 @@ export default function AddLesson() {
         "date": ""
     });
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        const {name, value} = event.target;
+    // function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    //     const {name, value} = event.target;
+    //     setLessonData({
+    //         ...lesson_data,
+    //         [name]: value,
+    //     });
+    //     console.log(lesson_data)
+    // }
+
+    const handleChange = (name: string) => (option: any) => {
         setLessonData({
             ...lesson_data,
-            [name]: value,
+            [name]: option.value
         });
-    }
+        console.log(lesson_data)
+        console.log(option)
+    };
 
-    async function handleSubmit(event: any) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-
-        // const lessonData = {
-        //     teacher: event.target.teacher.value,
-        //     student: event.target.student.value,
-        //     subject: event.target.subject.value,
-        //     period: event.target.period.value,
-        //     date: event.target.date.value,
-        // }
 
         const JSONlessonData = JSON.stringify(lesson_data)
         console.log(JSONlessonData)
@@ -59,9 +72,20 @@ export default function AddLesson() {
                 <div className="grid grid-cols-1 gap-6 mt-4">
                     <div>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="teacher">先生</label>
-                        <input id="teacher" type="text" name="teacher" value={lesson_data.teacher} onChange={handleChange}
-                               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={options}
+                            name="teacher"
+                            value={options.find((option) => option.value === lesson_data.teacher)}
+                            onChange={handleChange("teacher")}
+                        />
                     </div>
+                    {/*<div>*/}
+                    {/*    <label className="text-gray-700 dark:text-gray-200" htmlFor="teacher">先生</label>*/}
+                    {/*    <input id="teacher" type="text" name="teacher" value={lesson_data.teacher} onChange={handleChange}*/}
+                    {/*           className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>*/}
+                    {/*</div>*/}
 
                     <div>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="student">生徒</label>
