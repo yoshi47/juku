@@ -50,7 +50,7 @@ export default async function TeacherPage({params,}: { params: { teacher: string
             </div>
             <ul className="flex flex-col w-full">
                 {schedule.map((lesson) => (
-                    <li key={teacher.username} className="flex flex-row mb-2 border-gray-400">
+                    <li key={lesson.id} className="flex flex-row mb-2 border-gray-400">
                         <div
                             className="transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
                             <div
