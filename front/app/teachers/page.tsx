@@ -1,23 +1,5 @@
-import {Teacher} from "@type/types";
 import Link from "next/link";
-
-async function getTeachers() {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/teachers`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        cache: "reload",
-    })
-
-    if (!res.ok) {
-        const message = `An error has occurred: ${res.status}`;
-        throw new Error(message);
-    }
-
-    const data = await res.json();
-    return data as Teacher[];
-}
+import {getTeachers} from "@/lib/functions";
 
 export default async function TeacherList() {
     const teachers = await getTeachers();
