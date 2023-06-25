@@ -24,8 +24,8 @@ export async function getStudents() {
     return data as Student[];
 }
 
-export async function getTeachers() {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/teachers/`, {
+export async function getTeachers(url: string = `${process.env.BACKEND_URL}`) {
+    const res = await fetch(`${url}/api/teachers/`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
