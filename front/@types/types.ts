@@ -64,3 +64,13 @@ export type UserInfo = {
     name: string;
     role: string;
 };
+
+export type Subject = {
+    id: string;
+    name: string;
+};
+
+export type Option = {
+    label: string;
+    value: string | number;
+};

@@ -2,10 +2,14 @@
 
 import process from "process";
 import {useRouter} from "next/navigation";
-import {ChangeEvent, useEffect, useState} from "react";
-import {PostLesson, Teacher} from "@type/types";
-import {getTeachers} from "@/lib/functions";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {Option, PostLesson} from "@type/types";
+import {getStudents, getSubjects, getTeachers} from "@/lib/functions";
+import Select from "react-select";
 // import {useAsync} from 'react-use';
+
+const URL = process.env.NEXT_PUBLIC_API_BASE_URL
+
 
 export default function AddLesson() {
     const router = useRouter()
@@ -16,16 +20,51 @@ export default function AddLesson() {
         "period": 0,
         "date": ""
     });
-    const [teacherOptions, setTeacherOptions] = useState<Teacher[]>([]);
+    const [teacherOptions, setTeacherOptions] = useState<Option[]>([]);
+    const [studentOptions, setStudentOptions] = useState<Option[]>([]);
+    const [subjectOptions, setSubjectOptions] = useState<Option[]>([]);
 
-    const URL = process.env.NEXT_PUBLIC_API_BASE_URL
     useEffect(() => {
         getTeachers(URL)
-            .then(data => setTeacherOptions(data))
+            .then(Teachers => {
+                const formattedTeacher = Teachers.map(teacher => ({
+                    label: teacher.last_name + " " + teacher.first_name,
+                    value: teacher.username,
+                }));
+                setTeacherOptions(formattedTeacher);
+            })
             .catch(error => console.error(error));
-    }, [URL]);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) {
+        getStudents(URL)
+            .then(Students => {
+                const formattedStudent = Students.map(student => ({
+                    label: student.last_name + " " + student.first_name,
+                    value: student.username,
+                }));
+                setStudentOptions(formattedStudent);
+            })
+            .catch(error => console.error(error));
+
+        getSubjects(URL)
+            .then(Subjects => {
+                const formattedSubject = Subjects.map(subject => ({
+                    label: subject.name,
+                    value: subject.name,
+                }));
+                setSubjectOptions(formattedSubject);
+            })
+            .catch(error => console.error(error));
+    }, []);
+
+    const handleChange = (name: string) => (option: any) => {
+        setLessonData({
+            ...lessonData,
+            [name]: option.value
+        });
+        // console.log(lessonData)
+    };
+
+    function handleDateChange(event: ChangeEvent<HTMLInputElement>) {
         const {name, value} = event.target;
         setLessonData({
             ...lessonData,
@@ -34,13 +73,13 @@ export default function AddLesson() {
         // console.log(lessonData)
     }
 
-    async function handleSubmit(event: any) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         const JSONlessonData = JSON.stringify(lessonData)
         console.log(JSONlessonData)
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/lessons/`, {
+        const response = await fetch(`${process.env.URL}/api/lessons/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,52 +93,61 @@ export default function AddLesson() {
     }
 
     return (
-        <div className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+        <div className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 w-1/3">
             <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">授業登録</h2>
 
             <form onSubmit={handleSubmit}>
-                {/*<form>*/}
                 <div className="grid grid-cols-1 gap-6 mt-4">
-                    {/*<div>*/}
-                    {/*    <label className="text-gray-700 dark:text-gray-200" htmlFor="teacher">先生</label>*/}
-                    {/*    <input id="teacher" type="text" name="teacher" value={lessonData.teacher} onChange={handleChange}*/}
-                    {/*           className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>*/}
-                    {/*</div>*/}
                     <div>
-                        <label className="text-gray-700 dark:text-gray-200" htmlFor="teacher">先生</label>
-                        <select name="teacher" id="teacher" onChange={handleChange}>
-                            {teacherOptions.map(teacherOption => (
-                                <option key={teacherOption.username} value={teacherOption.username}>
-                                    {teacherOption.last_name + " " + teacherOption.first_name}
-                                </option>
-                            ))}
-                        </select>
+                        <p className="text-gray-700 dark:text-gray-200 mb-1">先生</p>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={teacherOptions}
+                            name="teacher"
+                            onChange={handleChange("teacher")}
+                        />
                     </div>
 
                     <div>
-                        <label className="text-gray-700 dark:text-gray-200" htmlFor="student">生徒</label>
-                        <input id="student" type="text" name="student" value={lessonData.student} onChange={handleChange}
-                               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
+                        <p className="text-gray-700 dark:text-gray-200 mb-1">生徒</p>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={studentOptions}
+                            name="student"
+                            onChange={handleChange("student")}
+                        />
                     </div>
 
                     <div>
-                        <label className="text-gray-700 dark:text-gray-200" htmlFor="subject">教科</label>
-                        <input id="subject" type="text" name="subject" value={lessonData.subject} onChange={handleChange}
-                               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
+                        <p className="text-gray-700 dark:text-gray-200 mb-1">教科</p>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={subjectOptions}
+                            name="subject"
+                            onChange={handleChange("subject")}
+                        />
                     </div>
 
                     <div>
-                        <label className="text-gray-700 dark:text-gray-200" htmlFor="period">時限</label>
-                        <input id="period" type="text" name="period" value={lessonData.period} onChange={handleChange}
-                               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
-                    </div>
+                        <p className="text-gray-700 dark:text-gray-200 mb-1">時限</p>
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={[...Array(8)].map((_, i) => {
+                                return {value: i + 1, label: `${i + 1}限`}
+                            })}
+                            name="period"
+                            onChange={handleChange("period")}
+                        /></div>
 
                     <div>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="date">日付</label>
-                        <input id="date" type="date" name="date" value={lessonData.date} onChange={handleChange}
+                        <input id="date" type="date" name="date" value={lessonData.date} onChange={handleDateChange}
                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
                     </div>
-
                 </div>
 
                 <div className="flex justify-end mt-6">
