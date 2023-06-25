@@ -2,8 +2,8 @@ import process from "process";
 import {Student, Teacher} from "@type/types";
 
 export function FormatDate(date: string) {
-    const formatedDate = new Date(date);
-    return `${formatedDate.getMonth() + 1}/${formatedDate.getDate()}`;
+    const formattedDate = new Date(date);
+    return `${formattedDate.getMonth() + 1}/${formattedDate.getDate()}`;
 }
 
 export async function getStudents() {
