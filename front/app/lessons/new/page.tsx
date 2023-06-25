@@ -93,7 +93,7 @@ export default function AddLesson() {
     }
 
     return (
-        <div className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 w-1/3">
+        <div className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 lg:w-1/3">
             <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">授業登録</h2>
 
             <form onSubmit={handleSubmit}>
