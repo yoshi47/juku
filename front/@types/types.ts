@@ -70,6 +70,11 @@ export type Subject = {
     name: string;
 };
 
+export type School = {
+    id: string;
+    name: string;
+};
+
 export type Option = {
     label: string;
     value: string | number;

@@ -1,5 +1,5 @@
 import process from "process";
-import {Student, Subject, Teacher} from "@type/types";
+import {School, Student, Subject, Teacher} from "@type/types";
 
 
 export function FormatDate(date: string) {
@@ -62,3 +62,22 @@ export async function getSubjects(url: string = `${process.env.BACKEND_URL}`) {
     const data = await res.json();
     return data as Subject[];
 }
+
+
+export async function getSchools(url: string = `${process.env.BACKEND_URL}`) {
+    const res = await fetch(`${url}/api/schools/`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    if (!res.ok) {
+        const message = `An error has occurred: ${res.status}`;
+        throw new Error(message);
+    }
+
+    const data = await res.json();
+    return data as School[];
+}
+

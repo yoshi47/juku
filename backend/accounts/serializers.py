@@ -13,10 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BaseStudentSerializer(serializers.ModelSerializer):
-    # school = serializers.CharField(source='school.name')
-    # todo all 以外の書き方知りたい
-    # todo charfieldでいいかも
-    school = serializers.PrimaryKeyRelatedField(queryset=School.objects.all(), source='school.name')
+    school = serializers.SlugRelatedField(queryset=School.objects.all(), slug_field='name')
     subjects = serializers.SlugRelatedField(queryset=Subject.objects.all(), many=True, slug_field='name')
 
     class Meta:
@@ -36,8 +33,6 @@ class StudentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(validated_data)
         student_data = validated_data.pop('student')
-        school_data = student_data.pop('school')['name']
-        student_data['school_id'] = School.objects.get(name=school_data).id
         subjects_data = student_data.pop('subjects')
 
         user = User.objects.create(**validated_data)

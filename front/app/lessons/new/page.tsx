@@ -77,7 +77,7 @@ export default function AddLesson() {
         event.preventDefault()
 
         const JSONlessonData = JSON.stringify(lessonData)
-        console.log(JSONlessonData)
+        // console.log(JSONlessonData)
 
         const response = await fetch(`${process.env.URL}/api/lessons/`, {
             method: "POST",
@@ -141,7 +141,8 @@ export default function AddLesson() {
                             })}
                             name="period"
                             onChange={handleChange("period")}
-                        /></div>
+                        />
+                    </div>
 
                     <div>
                         <label className="text-gray-700 dark:text-gray-200" htmlFor="date">日付</label>
