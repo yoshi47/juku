@@ -1,13 +1,68 @@
-docker compose run --rm django sh -c "django-admin startproject juku ."
+[//]: # (<h1 align="center">シフトくん</h1>)
 
-docker compose run --rm next sh -c "npx create-next-app ."
+# シフトくん
 
-docker compose run --rm next sh -c "npm update"
+## デモサイト
+[URL](https://juku-seven.vercel.app/)
 
-docker compose up -d
+### デモ用ユーザー
+本アプリケーションを試すためのデモ用ユーザー情報は以下のとおりです。
+- 生徒
+  - Username: 
+  - Password: 
+- 先生
+  - Username: 
+  - Password: 
+- 塾長
+  - Username: 
+  - Password: 
 
+デモ用ユーザーでログインすると、アプリケーションの主要な機能を試すことができます。
 
-docker compose run --rm django sh -c "django-admin startapp accounts" 
+## 概要
+個人塾でのスケジュール管理を想定したWebアプリケーションです。
 
-docker compose run --rm django sh -c "django-admin startapp lessons"
-docker compose run --rm djangoga sh -c "python manage.py dumpdata --exclude admin --exclude auth.permission --exclude contenttypes > all.json"
+## 使用技術
+- フロントエンド
+  - JavaScript
+  - TypeScript
+  - Next.js
+  - Tailwind CSS
+- バックエンド
+  - Python
+  - Django
+  - Django Rest Framework
+- データベース
+  - PostgreSQL
+- 認証
+  - JWT
+- デプロイ
+  - Vercel（フロントエンド）
+  - Heroku（バックエンド）
+
+## データベース設計
+以下は本アプリケーションのデータベース設計のER図です。
+
+![ER Diagram](accounts_school1.png)
+
+## 機能と使い方
+- ユーザー（生徒・先生）登録・ログイン機能
+- 授業予定の登録
+
+### ロールベースのアクセス制御
+
+- **生徒**: 生徒個人のスケジュールを閲覧可能です。
+- **先生**: 全生徒・先生のスケジュールを閲覧可能です。
+- **塾長**: 先生のすべての機能に加え、授業予定の登録が可能です。
+
+## 実装予定の機能
+- カレンダービュー
+- サイドバーで誰のスケジュールを閲覧するか選べるようにする
+- 
+
+## 開発の背景
+アルバイト先の塾で使っているシステムが使いにくいと悩んでいたので、それを解決できるアプリケーションを目指してつくりました。
+
+## なぜDjangoとReactを選んだのか？
+
+## 振り返り
