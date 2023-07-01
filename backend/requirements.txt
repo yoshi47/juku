@@ -5,6 +5,7 @@ cryptography
 django-environ
 psycopg2
 django-cors-headers
+django-filter
 
 gunicorn
 django-heroku
