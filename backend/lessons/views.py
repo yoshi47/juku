@@ -9,6 +9,7 @@ from .serializers import LessonSerializer, SubjectSerializer
 class LessonFilter(filters.FilterSet):
     teacher_username = filters.CharFilter(field_name='teacher__username', lookup_expr='teacher_username')
     student_username = filters.CharFilter(field_name='student__username')
+    date = filters.DateFromToRangeFilter()
 
     class Meta:
         model = Lesson
