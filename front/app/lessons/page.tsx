@@ -73,24 +73,21 @@ export default function LessonsPage() {
 
     const handleMonthChange = (newMonth: Date | null): void => {
         if(newMonth) setMonth(newMonth);
-        console.log(newMonth)
     };
 
-    // todo 長いから外側で定義する
-    // const isLessonDate = ({date, view}: { date: date, view: any }) => {
-    //     const dateString = date.toLocaleDateString('sv-SE')
-    //
-    //     if (!(view === "month")) {
-    //         return null;
-    //     }
-    //     if (lessons.some(lesson => lesson.date === dateString)) {
-    //         return <p>✔</p>
-    //     }
-    // }
+    const isLessonDate = (date: Date) => {
+        const dateString = date.toLocaleDateString('sv-SE')
+
+        if (lessons.some(lesson => lesson.date === dateString)) {
+            return <p className="text-green-400">✔</p>
+        }
+    }
 
     return (
         < div className=" flex flex-col items-center px-5 py-8 mx-auto lg:px-24">
             <MonthSelector month={month} handleMonthChange={handleMonthChange}/>
+            {/*todo 押さなくてもいいようにする*/}
+            <p className="mt-3">カレンダーを一回押すと授業がある日がわかります</p>
 
             < div className="flex flex-wrap py-8 md:flex-nowrap">
                 < div className="prose md:flex-grow prose-md lg:pr-12">
@@ -106,13 +103,7 @@ export default function LessonsPage() {
                         calendarType="US"
                         locale="ja"
                         formatDay={(locale, date) => date.getDate().toString()}
-                        // tileContent={({date, view}) => isLessonDate({date, view})}
-
-                        tileContent={({
-                                          date,
-                                          view
-                                      }) => view === "month" && lessons.some(lesson => lesson.date === date.toLocaleDateString('sv-SE')) ?
-                            <p className="text-green-400">✔</p> : null}
+                        tileContent={({date, view}) => view === "month" ? isLessonDate(date): null}
                     />
                 </div>
             </div>
