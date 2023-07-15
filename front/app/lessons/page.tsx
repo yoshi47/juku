@@ -6,7 +6,7 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import {MonthSelector} from "@components/Month-selector";
 import {LessonList} from "@components/Lesson-list";
-import {date as RCdate} from "react-calendar"
+// import date from "react-calendar"
 
 
 async function getLessons(date: Date) {
@@ -71,11 +71,13 @@ export default function LessonsPage() {
     }, [month]);
 
 
-    const handleMonthChange = (newMonth: Date): void => {
-        setMonth(newMonth);
+    const handleMonthChange = (newMonth: Date | null): void => {
+        if(newMonth) setMonth(newMonth);
+        console.log(newMonth)
     };
 
-    // const isLessonDate = ({date, view}: { date: RCdate, view: any }) => {
+    // todo 長いから外側で定義する
+    // const isLessonDate = ({date, view}: { date: date, view: any }) => {
     //     const dateString = date.toLocaleDateString('sv-SE')
     //
     //     if (!(view === "month")) {
@@ -98,11 +100,14 @@ export default function LessonsPage() {
                 <div className="flex flex-col flex-shrink-0 px-4 mb-6 md:w-64 md:mb-0">
                     <Calendar
                         onClickDay={setDate}
+                        onActiveStartDateChange={({ activeStartDate }) => handleMonthChange(activeStartDate)}
+                        activeStartDate={month}
                         value={date}
                         calendarType="US"
                         locale="ja"
                         formatDay={(locale, date) => date.getDate().toString()}
                         // tileContent={({date, view}) => isLessonDate({date, view})}
+
                         tileContent={({
                                           date,
                                           view
