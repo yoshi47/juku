@@ -6,6 +6,7 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import {MonthSelector} from "@components/Month-selector";
 import {LessonList} from "@components/Lesson-list";
+import {date as RCdate} from "react-calendar"
 
 
 async function getLessons(date: Date) {
@@ -29,7 +30,9 @@ async function getLessons(date: Date) {
 }
 
 export default function LessonsPage() {
+    // 選択している月にある授業を格納
     const [lessons, setLessons] = useState<Lesson[]>([]);
+    // 選択した日にある授業を格納
     const [selectedDayLessons, setSelectedDayLessons] = useState<Lesson[]>([])
     const [date, setDate] = useState<Date>(new Date());
     const [month, setMonth] = useState<Date>(new Date());
@@ -72,6 +75,17 @@ export default function LessonsPage() {
         setMonth(newMonth);
     };
 
+    // const isLessonDate = ({date, view}: { date: RCdate, view: any }) => {
+    //     const dateString = date.toLocaleDateString('sv-SE')
+    //
+    //     if (!(view === "month")) {
+    //         return null;
+    //     }
+    //     if (lessons.some(lesson => lesson.date === dateString)) {
+    //         return <p>✔</p>
+    //     }
+    // }
+
     return (
         < div className=" flex flex-col items-center px-5 py-8 mx-auto lg:px-24">
             <MonthSelector month={month} handleMonthChange={handleMonthChange}/>
@@ -88,7 +102,12 @@ export default function LessonsPage() {
                         calendarType="US"
                         locale="ja"
                         formatDay={(locale, date) => date.getDate().toString()}
-                        // tileContent={getTileContent}
+                        // tileContent={({date, view}) => isLessonDate({date, view})}
+                        tileContent={({
+                                          date,
+                                          view
+                                      }) => view === "month" && lessons.some(lesson => lesson.date === date.toLocaleDateString('sv-SE')) ?
+                            <p className="text-green-400">✔</p> : null}
                     />
                 </div>
             </div>
