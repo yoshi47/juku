@@ -7,7 +7,7 @@ from .serializers import LessonSerializer, SubjectSerializer
 
 # Create your views here.
 class LessonFilter(filters.FilterSet):
-    teacher_username = filters.CharFilter(field_name='teacher__username', lookup_expr='teacher_username')
+    teacher_username = filters.CharFilter(field_name='teacher__username')
     student_username = filters.CharFilter(field_name='student__username')
     date = filters.DateFromToRangeFilter()
 
