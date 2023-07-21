@@ -79,7 +79,7 @@ export default function AddLesson() {
         const JSONlessonData = JSON.stringify(lessonData)
         // console.log(JSONlessonData)
 
-        const response = await fetch(`${process.env.URL}/api/lessons/`, {
+        const response = await fetch(`${URL}/api/lessons/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
