@@ -1,5 +1,4 @@
 import {useEffect, useRef, useState} from "react";
-import {className} from "postcss-selector-parser";
 import {Lesson} from "@type/types";
 import {getLessons} from "@/lib/functions";
 

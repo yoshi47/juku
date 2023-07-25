@@ -81,7 +81,7 @@ export async function getSchools(url: string = `${process.env.BACKEND_URL}`) {
     return data as School[];
 }
 
-export const getLessons = async (date:Date) => {
+export const getLessons = async (date: Date) => {
     const date_after: string = new Date(date.getFullYear(), date.getMonth(), 1).toLocaleDateString('sv-SE');
     const date_before: string = new Date(date.getFullYear(), date.getMonth() + 1, 0).toLocaleDateString('sv-SE');
 
