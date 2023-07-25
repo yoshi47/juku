@@ -6,6 +6,8 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import {MonthSelector} from "@components/Month-selector";
 import {LessonList} from "@components/Lesson-list";
+import {useLessons} from "@/hooks/useLessons";
+
 // import date from "react-calendar"
 
 
@@ -30,58 +32,16 @@ async function getLessons(date: Date) {
 }
 
 export default function LessonsPage() {
-    // 選択している月にある授業を格納
-    const [lessons, setLessons] = useState<Lesson[]>([]);
-    // 選択した日にある授業を格納
-    const [selectedDayLessons, setSelectedDayLessons] = useState<Lesson[]>([])
-    const [date, setDate] = useState<Date>(new Date());
-    const [month, setMonth] = useState<Date>(new Date());
 
-    const isFirstRender = useRef(false)
-
-    useEffect(() => {
-        isFirstRender.current = true
-    }, [])
-
-    // 日付で絞り込み
-    useEffect(() => {
-        // 初回は今月の予定一覧を表示させる（日付で絞り込まないように）
-        if (isFirstRender.current) {
-            isFirstRender.current = false
-        } else {
-            getLessons(date)
-                .then(lessons => {
-                    const filteredLessons = lessons.filter(lesson => {
-                        // sv-SEロケールはYYYY-MM-DD形式の日付文字列を戻す
-                        const lessonDate = date.toLocaleDateString('sv-SE')
-                        return lessonDate === lesson["date"];
-                    })
-                    setLessons(lessons);
-                    setSelectedDayLessons(filteredLessons);
-                })
-        }
-    }, [date]);
-
-    // 月で絞り込み
-    useEffect(() => {
-        getLessons(month)
-            .then(lessons => {
-                setSelectedDayLessons(lessons);
-            })
-    }, [month]);
-
-
-    const handleMonthChange = (newMonth: Date | null): void => {
-        if(newMonth) setMonth(newMonth);
-    };
-
-    const isLessonDate = (date: Date) => {
-        const dateString = date.toLocaleDateString('sv-SE')
-
-        if (lessons.some(lesson => lesson.date === dateString)) {
-            return <p className="text-green-400">✔</p>
-        }
-    }
+    const {
+    // lessons,
+    selectedDayLessons,
+    date,
+    month,
+    handleMonthChange,
+    isLessonDate,
+    setDate,
+    } = useLessons();
 
     return (
         < div className=" flex flex-col items-center px-5 py-8 mx-auto lg:px-24">
@@ -97,13 +57,13 @@ export default function LessonsPage() {
                 <div className="flex flex-col flex-shrink-0 px-4 mb-6 md:w-64 md:mb-0">
                     <Calendar
                         onClickDay={setDate}
-                        onActiveStartDateChange={({ activeStartDate }) => handleMonthChange(activeStartDate)}
+                        onActiveStartDateChange={({activeStartDate}) => handleMonthChange(activeStartDate)}
                         activeStartDate={month}
                         value={date}
                         calendarType="US"
                         locale="ja"
                         formatDay={(locale, date) => date.getDate().toString()}
-                        tileContent={({date, view}) => view === "month" ? isLessonDate(date): null}
+                        tileContent={({date, view}) => view === "month" ? isLessonDate(date) : null}
                     />
                 </div>
             </div>
